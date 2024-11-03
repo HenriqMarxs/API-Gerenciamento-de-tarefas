@@ -1,0 +1,1 @@
+ALTER TABLE "goals" RENAME COLUMN "desered_weekly_frenquency" TO "desired_weekly_frequency";
