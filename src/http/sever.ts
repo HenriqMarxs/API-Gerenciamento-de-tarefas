@@ -30,7 +30,7 @@ app.register(swagger, {
       description: 'Documentação da API utilizando Fastify e Swagger',
       version: '1.0.0',
     },
-    host: 'localhost:3333',
+    host: process.env.SWAGGER_HOST || 'localhost:3333',
     schemes: ['http'],
     consumes: ['application/json'],
     produces: ['application/json'],
@@ -48,13 +48,15 @@ app.register(getPendingGoalsRoute)
 app.register(createCompletionRoute)
 app.register(getWeekSummaryRoute)
 
+const port = process.env.PORT || 3333
+
 // Iniciar o Servidor
 app
   .listen({
-    port: 3333,
+    port: Number(port),
     host: '0.0.0.0',
   })
   .then(() => {
-    console.log('🚀 HTTP Server running on http://localhost:3333')
-    console.log('📄 Swagger docs available on http://localhost:3333/docs')
+    console.log('🚀 HTTP Server running')
+    console.log('📄 Swagger docs available link/docs')
   })
