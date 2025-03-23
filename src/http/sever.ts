@@ -9,6 +9,7 @@ import { createGoalRoute } from './routes/create-goals'
 import { getPendingGoalsRoute } from './routes/get-pending-goals'
 import { createCompletionRoute } from './routes/create-completion'
 import { getWeekSummaryRoute } from './routes/get-week-summary'
+import { deleteGoal } from './routes/delete-goal'
 import fastifyCors from '@fastify/cors'
 import swagger from '@fastify/swagger'
 import swaggerUi from '@fastify/swagger-ui'
@@ -47,6 +48,7 @@ app.register(createGoalRoute)
 app.register(getPendingGoalsRoute)
 app.register(createCompletionRoute)
 app.register(getWeekSummaryRoute)
+app.register(deleteGoal)
 
 const port = process.env.PORT || 3333
 

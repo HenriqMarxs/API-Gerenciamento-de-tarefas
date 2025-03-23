@@ -8,8 +8,8 @@ export const deleteGoal: FastifyPluginAsyncZod = async (app)=>{
         {
           schema: {
             description: 'Rota responsavel por deletar uma meta, sendo necessario informar o id da meta',
-            params: z.object({
-              goalId: z.string().uuid().describe('Id da meta'),
+            body: z.object({
+              goalId: z.string(),
             }),
             response:{
                 200: z.null().describe('Meta deletada com sucesso'),
@@ -19,9 +19,9 @@ export const deleteGoal: FastifyPluginAsyncZod = async (app)=>{
           },
         },
         async request => {
-          const { id } = request.params
+          const {goalId} = request.body
           await deleteGoalFunction({
-            goalId: id,
+            goalId,
           })
         }
       )

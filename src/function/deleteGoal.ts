@@ -3,10 +3,10 @@ import { db } from '../db'
 import { goals, goalCompletions } from '../db/schema'
 import { lte, count, gte, and, eq, sql } from 'drizzle-orm'
 
-interface deleteGoalRerquest {
+interface deleteGoalRes {
     goalId: string
   }
-export async function deleteGoalFunction({goalId,}: deleteGoalRerquest) {
+export async function deleteGoalFunction({goalId,}: deleteGoalRes) {
 
     const deleteFromCompletion = await db
     .delete(goalCompletions)
@@ -17,10 +17,10 @@ export async function deleteGoalFunction({goalId,}: deleteGoalRerquest) {
     .delete(goals)
     .where(eq(goals.id, goalId))
     .returning()    
-  const goal = deleteFromGoals;
+  const goalDeleted = deleteFromGoals[0];
 
   return {
-    goal,
+    goalDeleted,
   }
 
     
