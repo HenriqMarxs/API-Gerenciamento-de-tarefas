@@ -10,8 +10,6 @@ import { getPendingGoalsRoute } from './routes/get-pending-goals'
 import { createCompletionRoute } from './routes/create-completion'
 import { getWeekSummaryRoute } from './routes/get-week-summary'
 import fastifyCors from '@fastify/cors'
-
-// Importando Swagger
 import swagger from '@fastify/swagger'
 import swaggerUi from '@fastify/swagger-ui'
 
