@@ -32,7 +32,7 @@ app.register(swagger, {
       version: '1.0.0',
     },
     host: process.env.SWAGGER_HOST || 'localhost:3333',
-    schemes: ['http'],
+    schemes: ['https'],
     consumes: ['application/json'],
     produces: ['application/json'],
   },
