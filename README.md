@@ -85,7 +85,7 @@ Após iniciar o servidor, acesse a documentação interativa do Swagger em:
 
 ```json
 {
-  "goalId": "123e4567-e89b-12d3-a456-426614174000"
+  "goalId": "id_da_meta"
 }
 ```
 
