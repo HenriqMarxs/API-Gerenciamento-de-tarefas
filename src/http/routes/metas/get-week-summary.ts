@@ -1,6 +1,6 @@
 
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
-import { getWeekSummary } from '../../function/getWeekSummary'
+import { getWeekSummary } from '../../../function/metas/getWeekSummary'
 import z from 'zod'
 
 export const getWeekSummaryRoute: FastifyPluginAsyncZod = async (app)=>{
@@ -25,18 +25,26 @@ export const getWeekSummaryRoute: FastifyPluginAsyncZod = async (app)=>{
 
     app.get('/summary',{
         schema:{
-            description:'Rota responsavel por retornar um resumo semanal das metas completadas, separandoas por dia',
+            description:'Route to get the summary of the week',
            response:{
              200:summarySchema,
-             400: z.null().describe('Erro ao completar meta'),
-             500: z.null().describe('Erro interno no servidor')
+             400:z.object({
+                  statuscode:z.number(),
+                  code:z.string(),
+                  message:z.string()
+              }).describe('Error to get summary'),
+              500:z.object({
+                  statuscode:z.number(),
+                  code:z.string(),
+                  message:z.string()
+              }).describe('Internal server error')
            }
         }
 
     }, async  ()=>{
         const {summary}= await getWeekSummary()
 
-        
+      
         return {summary}
     })
 }

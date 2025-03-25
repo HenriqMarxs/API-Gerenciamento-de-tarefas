@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import fastify from 'fastify'
-import { createGoalCompletion } from '../../function/createGoalCompletion'
+import { createGoalCompletion } from '../../../function/metas/createGoalCompletion'
 import { REPL_MODE_SLOPPY } from 'repl'
 
 
@@ -15,9 +15,18 @@ export const createCompletionRoute: FastifyPluginAsyncZod = async (app)=>{
               goalId: z.string(),
             }),
             response:{
-                200: z.null().describe('Meta completada com sucesso'),
-                400: z.null().describe('Erro ao completar meta'),
-                500: z.null().describe('Erro interno no servidor')
+                200: z.null().describe('Goal completed with success'),
+                400:z.object({
+                  statuscode:z.number(),
+                  code:z.string(),
+                  message:z.string()
+              }).describe('Errot to complete goal'),
+
+              500:z.object({
+                  statuscode:z.number(),
+                  code:z.string(),
+                  message:z.string()
+              }).describe('Internal server error')
             }
           },
         },

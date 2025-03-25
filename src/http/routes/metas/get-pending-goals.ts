@@ -1,7 +1,6 @@
 import { z } from 'zod'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
-import { getWeekPendingGoals } from '../../function/getWeekPendingGoals'
-import { FastifyTypedInstance } from '../../types'
+import { getWeekPendingGoals } from '../../../function/metas/getWeekPendingGoals'
 
 export const getPendingGoalsRoute: FastifyPluginAsyncZod = async (app)=>{
     app.get('/pending-goals', {
@@ -16,8 +15,17 @@ export const getPendingGoalsRoute: FastifyPluginAsyncZod = async (app)=>{
               completionCount: z.number().int(),
               })),  
             }),
-          400: z.null().describe('Erro ao completar meta'),
-          500: z.null().describe('Erro interno no servidor')
+            400:z.object({
+              statuscode:z.number(),
+              code:z.string(),
+              message:z.string()
+          }).describe('Error to get pending goals'),
+
+          500:z.object({
+              statuscode:z.number(),
+              code:z.string(),
+              message:z.string()
+          }).describe('Internal server error')
           },
          },  
     },async () => {

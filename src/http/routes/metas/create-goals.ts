@@ -1,10 +1,7 @@
 import { z } from 'zod'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
-import fastify from 'fastify'
-import { createGoals } from '../../function/createGoal'
-import { FastifyInstance } from 'fastify/types/instance'
-import { desc } from 'drizzle-orm'
-import { FastifyTypedInstance } from '../../types'
+import { createGoals } from '../../../function/metas/createGoal'
+
 
 export const createGoalRoute: FastifyPluginAsyncZod = async (app)=>{
     app.post(
@@ -17,9 +14,18 @@ export const createGoalRoute: FastifyPluginAsyncZod = async (app)=>{
               desiredWeeklyFrequency: z.number().int().min(1).max(7)
             }),
             response: {
-              200: z.null().describe('Meta criada com sucesso'),
-              400: z.null().describe('Erro ao criar meta'),
-              500: z.null().describe('Erro interno no servidor')
+              200: z.null().describe('Goal created with success'),
+              400:z.object({
+                statuscode:z.number(),
+                code:z.string(),
+                message:z.string()
+            }).describe('Error to create goal'),
+
+            500:z.object({
+                statuscode:z.number(),
+                code:z.string(),
+                message:z.string()
+            }).describe('Internal server error')
         },
       },
     },

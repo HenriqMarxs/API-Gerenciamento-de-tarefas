@@ -5,14 +5,18 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
-import { createGoalRoute } from './routes/create-goals'
-import { getPendingGoalsRoute } from './routes/get-pending-goals'
-import { createCompletionRoute } from './routes/create-completion'
-import { getWeekSummaryRoute } from './routes/get-week-summary'
-import { deleteGoal } from './routes/delete-goal'
+import { createGoalRoute } from './routes/metas/create-goals'
+import { getPendingGoalsRoute } from './routes/metas/get-pending-goals'
+import { createCompletionRoute } from './routes/metas/create-completion'
+import { getWeekSummaryRoute } from './routes/metas/get-week-summary'
+import { deleteGoal } from './routes/metas/delete-goal'
 import fastifyCors from '@fastify/cors'
 import swagger from '@fastify/swagger'
 import swaggerUi from '@fastify/swagger-ui'
+import 'dotenv/config'
+import { createUserRoute } from '../http/routes/users/create-user'
+import { getUser } from '../function/users/getUser'
+import { getUserRoute } from './routes/users/get-user'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -27,12 +31,12 @@ app.register(fastifyCors, {
 app.register(swagger, {
   swagger: {
     info: {
-      title: 'API de Gerenciamento de Tarefas',
-      description: 'Documentação da API utilizando Fastify e Swagger',
+      title: 'API of Goals',
+      description: 'Documentation of the API',
       version: '1.0.0',
     },
     host: process.env.SWAGGER_HOST || 'localhost:3333',
-    schemes: ['https'],
+    schemes: ['http', 'https'],	
     consumes: ['application/json'],
     produces: ['application/json'],
   },
@@ -49,14 +53,15 @@ app.register(getPendingGoalsRoute)
 app.register(createCompletionRoute)
 app.register(getWeekSummaryRoute)
 app.register(deleteGoal)
+app.register(createUserRoute)
+app.register(getUserRoute)
 
-const port = process.env.PORT || 3333
 
 // Iniciar o Servidor
 app
   .listen({
-    port: Number(port),
     host: '0.0.0.0',
+    port: 3333, 
   })
   .then(() => {
     console.log('🚀 HTTP Server running')

@@ -1,6 +1,6 @@
 import z from 'zod'
-import { db } from '../db'
-import { goals, goalCompletions } from '../db/schema'
+import { db } from '../../db'
+import { goals, goalCompletions } from '../../db/schema'
 import { lte, count, gte, and, eq, sql } from 'drizzle-orm'
 
 interface deleteGoalRes {
@@ -16,7 +16,8 @@ export async function deleteGoalFunction({goalId,}: deleteGoalRes) {
     const deleteFromGoals = await db
     .delete(goals)
     .where(eq(goals.id, goalId))
-    .returning()    
+    .returning()
+     
   const goalDeleted = deleteFromGoals[0];
 
   return {
