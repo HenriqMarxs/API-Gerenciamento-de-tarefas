@@ -95,21 +95,7 @@ Após iniciar o servidor, acesse a documentação interativa do Swagger em:
 - `400 Bad Request`: Erro ao deletar a meta (ex: goalId inválido)
 - `500 Internal Server Error`: Erro interno do servidor
 
-## ✅ Testes
 
-Execute os testes com:
-
-```bash
-$ npm run test
-```
-
-## 📌 Contribuição
-
-1. Fork o projeto
-2. Crie uma branch (`feature/nova-funcionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Faça o push na branch (`git push origin feature/nova-funcionalidade`)
-5. Abra um Pull Request
 
 ## 📄 Licença
 
@@ -117,5 +103,5 @@ Este projeto está sob a licença MIT. Sinta-se livre para utilizá-lo e aprimor
 
 ---
 
-💡 \*\*Desenvolvido por \*\*[**Seu Nome**](https://github.com/seu-usuario)
+💡 \*\*Desenvolvido por \*\*[**Henrique Marques**](https://github.com/HenriqMarxs)
 
