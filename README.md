@@ -75,6 +75,10 @@ Após iniciar o servidor, acesse a documentação interativa do Swagger em:
 
 👉 [http://localhost:3000/docs](http://localhost:3000/docs)
 
+Mas caso queira visualizar a documentação da API sem ter que seguir os passos anterios clique em:
+
+👉[API Docs](https://api-gerenciamento-de-tarefas-pad4.onrender.com/docs)
+
 ## 📌 Exemplos de Rotas
 
 ### ➤ Deletar uma meta
